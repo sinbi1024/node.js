@@ -17,9 +17,14 @@ app.get('/', (req, res) => {
 
 app.get('/sending', (req, res) => {
     res.sendFile(__dirname + '/public/form.html');
-})
+});
 
 app.post('/email_post', (req, res) => {
     console.log(req.body.email);
     res.render('email.ejs', { 'email': req.body.email });
-})
+});
+
+app.post('/ajax_send_email', (req, res) => {
+    var resData = {'response': 'ok', 'email': req.body.email};
+    res.json(resData);
+});
