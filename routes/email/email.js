@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const mysql = require('mysql');
+const path = require('path');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -13,14 +14,18 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
+router.get('/email', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../public/form.html'));
+});
+
 app.set('view engine', 'ejs');
 
-router.post('/form', (req, res) => {
+router.post('/email/form', (req, res) => {
     console.log(req.body.email);
     res.render('email.ejs', { 'email': req.body.email });
 });
 
-router.post('/ajax', (req, res) => {
+router.post('/email/ajax', (req, res) => {
     var email = req.body.email;
     var resData = {};
 
