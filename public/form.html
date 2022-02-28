@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Sending Email</title>
 </head>
 <body>
 
-    <form action="/email_post" method="post">
+    <form action="/email/form" method="post">
         email: <input type="text" name="email">
         <br/>
         <input type="submit">
@@ -20,7 +20,7 @@
         document.querySelector('.ajaxsend').addEventListener('click', function() {
             var inputData = document.forms[0].elements[0].value;
 
-            sendAjax('http://127.0.0.1:3000/ajax_send_email', inputData);
+            sendAjax('http://127.0.0.1:3000/email/ajax', inputData);
         });
 
         function sendAjax(url, data) {
