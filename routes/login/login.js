@@ -4,6 +4,7 @@ const router = express.Router();
 const mysql = require('mysql');
 const path = require('path');
 const passport = require('passport');
+const { redirect } = require('express/lib/response');
 const LocalStrategy = require('passport-local').Strategy;
 
 const connection = mysql.createConnection({
@@ -38,30 +39,29 @@ passport.deserializeUser((email, done) => {
 passport.use('local-login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'passwd',
-    passReqToCallback: true
-}, (req, email, passwd, done) => {
-    var query = connection.query('select * from users where email=?', [email], (err, rows) => {
-        if (err) return done(err);
+    passReqToCallback: true }, (req, email, passwd, done) => {
+        var query = connection.query('select * from users where email=?', [email], (err, rows) => {
+            if (err) return done(err);
 
-        if (rows.length) {
-            console.log('existed user');
-            
-            return done(null, false, { message: 'your email is already existed' });
-        } else {
-            var sql = { email: email, passwd: passwd };
-            var query = connection.query("insert into users set ?", sql, (err, rows) => {
-                if (err) throw err;
-
+            if (rows.length) {
                 return done(null, { 'email': email });
-            });
-        }
-    });
-}));
+            } else {
+                return done(null, false, { 'message': 'your info is not found....'});
+            }
+        });
+    }
+));
 
-router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/main',
-    failureRedirect: '/register',
-    failureFlash: true
-}));
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local-login', (err, user, info) => {
+        if (err) res.status(500).json(err);
+        if (!user) return res.status(401).json(info.message);
+
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+            return res.json(user);
+        });
+    })(req, res, next);
+});
 
 module.exports = router;

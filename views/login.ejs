@@ -22,7 +22,7 @@
             var email = document.getElementsByName('email')[0].value;
             var passwd = document.getElementsByName('passwd')[0].value;
 
-            sendAjax('http://localhost:3000/email/ajax', { 'email': email, 'passwd': passwd });
+            sendAjax('http://localhost:3000/login', { 'email': email, 'passwd': passwd });
         });
 
         function sendAjax(url, data) {
@@ -37,8 +37,8 @@
                 var result = JSON.parse(xhr.responseText);
                 var resultDiv = document.querySelector('.result');
 
-                if (result.result != 'ok') resultDiv.innerHTML = "not found....";
-                else resultDiv.innerHTML = result.name;
+                if (result.email) resultDiv.innerHTML = "Welcome, " + result.email;
+                else resultDiv.innerHTML = result;
             });
         }
     </script>
