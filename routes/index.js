@@ -7,6 +7,8 @@ router.get('/', (req, res) => {
 
 router.get('/main', (req, res) => {
     var email = req.user;
+
+    if (!email) res.render('login.ejs');
     res.render('index.ejs', { 'email': email });
 });
 

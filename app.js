@@ -10,6 +10,7 @@ const index = require('./routes/index');
 const email = require('./routes/email/email');
 const register = require('./routes/register/register');
 const login = require('./routes/login/login');
+const logout = require('./routes/logout/logout');
 
 app.listen(3000, () => {
     console.log("start! express server on port 3000");
@@ -35,3 +36,4 @@ app.use(index);
 app.use(email);
 app.use(register);
 app.use(login);
+app.use(logout);

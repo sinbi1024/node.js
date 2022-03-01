@@ -37,7 +37,8 @@
                 var result = JSON.parse(xhr.responseText);
                 var resultDiv = document.querySelector('.result');
 
-                if (result.email) resultDiv.innerHTML = "Welcome, " + result.email;
+                if (result.email) window.location.href='/main';
+                else if (xhr.status == 401) resultDiv.innerHTML = result + "<div class='signup'><a href='/register'>Sign UP</a></div>";
                 else resultDiv.innerHTML = result;
             });
         }

@@ -64,19 +64,4 @@ router.post('/register', passport.authenticate('local-register', {
     failureFlash: true
 }));
 
-// router.post('/register', (req, res) => {
-//     var body = req.body;
-//     var email = body.email;
-//     var name = body.name;
-//     var passwd = body.passwd;
-
-//     var sql = { 'email': email, 'name': name, 'passwd': passwd };
-
-//     var query = connection.query(
-//         'insert into users set ?', sql, (err, rows) => {
-//             if (err) throw err;
-//             else res.render('welcome.ejs', { 'name': name, 'email': email });
-//     })
-// });
-
 module.exports = router;
