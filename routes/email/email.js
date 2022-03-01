@@ -18,8 +18,6 @@ router.get('/email', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/form.html'));
 });
 
-app.set('view engine', 'ejs');
-
 router.post('/email/form', (req, res) => {
     console.log(req.body.email);
     res.render('email.ejs', { 'email': req.body.email });

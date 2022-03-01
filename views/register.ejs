@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <style>
+        .message{
+            color: #963b3b;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Join My Website!</h1>
+    <section class="message"><%= message %></section>
+    <form action="/register" method="post">
+    email: <input type="text" name="email"><br>
+    password: <input type="text" name="passwd"><br>
+    <input type="submit">
+    </form>
+</body>
+</html>
