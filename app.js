@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const index = require('./routes/index');
 const email = require('./routes/email/email');
 const register = require('./routes/register/register');
+const login = require('./routes/login/login');
 
 app.listen(3000, () => {
     console.log("start! express server on port 3000");
@@ -33,3 +34,4 @@ app.set('view engine', 'ejs');
 app.use(index);
 app.use(email);
 app.use(register);
+app.use(login);
